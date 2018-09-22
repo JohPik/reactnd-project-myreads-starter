@@ -1,34 +1,28 @@
 import React, { Component } from 'react'
-import Book from './Book'
+import Books from './Books'
 
 class BookShelf extends Component {
+
+  state = {
+      shelvesName:["Currently Reading", "Want to Read", "Read"],
+      currentlyReading: [],
+      wantToRead: [],
+      read: []
+  }
+
   render() {
     return (
-  <div className="list-books-content">
-    <div>
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">Currently Reading</h2>
-        <div className="bookshelf-books">
-          <Book books={this.state.books}/>
-        </div>
+      <div className="list-books-content">
+        <div>{/* Maybe need to remove this div part1*/}
+            {this.state.shelvesName.map(shelf =>
+              <div className="bookshelf" key={shelf}>
+                <h2 className="bookshelf-title">{shelf}</h2>
+                <div className="bookshelf-books"></div>
+                <Books />
+              </div>
+            )}
+        </div>{/* Maybe need to remove this div part2*/}
       </div>
-
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">Want to Read</h2>
-        <div className="bookshelf-books">
-          <Book books={this.state.books}/>
-        </div>
-      </div>
-
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">Read</h2>
-        <div className="bookshelf-books">
-          <Book books={this.state.books}/>
-        </div>
-      </div>
-
-    </div>
-  </div>
     )}
 }
 

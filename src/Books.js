@@ -1,13 +1,24 @@
 import React, { Component } from 'react'
-import BookShelf from './BookShelf'
+
+import * as BooksAPI from './BooksAPI'
 
 
-class Book extends Component {
+class Books extends Component {
+
+    state = {
+       books:[]
+    }
+
+    componentDidMount() {
+      BooksAPI.getAll().then(books => this.setState({books}))
+    }
+
+
     render() {
-      console.log('props', this.props)
+      console.log(this.state)
     return (
-    <ol className="books-grid">
-      {this.props.books.map(book =>
+      <ol className="books-grid">
+      {this.state.books.map(book =>
         <li key={book.id}>
             <div className="book">
               <div className="book-top">
@@ -31,4 +42,4 @@ class Book extends Component {
     )}
   }
 
-export default Book
+export default Books
