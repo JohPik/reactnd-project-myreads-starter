@@ -4,8 +4,8 @@ import BookList from './BookList'
 class BookShelf extends Component {
   render() {
 
-    console.log("bookShelProps", this.props)
-    console.log("bookshelves", this.props.bookShelves)
+    //console.log("bookShelProps", this.props)
+    //console.log("bookshelves", this.props.bookShelves)
 
 
 
