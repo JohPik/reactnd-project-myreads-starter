@@ -14,20 +14,18 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    currentlyReading: [],
-    wantToRead: [],
-    read: [],
+    allBooks: [],
     showSearchPage: false
   }
 
   bookShelves = [
     {name: "Currently Reading", id:"currentlyReading", bookCollection:[]},
-    {name: "Want To Read", id:"wantToRead"},
-    {name: "Read", id:"read"}
+    {name: "Want To Read", id:"wantToRead", bookCollection:[]},
+    {name: "Read", id:"read", bookCollection:[]}
   ]
 
 
-  componentDidMount() {
+  componentDidMount() { // call for All the Books currently in the App
     BooksAPI.getAll().then((books) => {
 
       /* Filter the books between bookShelves */
@@ -36,6 +34,9 @@ class BooksApp extends React.Component {
       let read = books.filter(book => book.shelf === "read");
 
       this.bookShelves[0].bookCollection.push(currentlyReading)
+      this.bookShelves[1].bookCollection.push(wantToRead)
+      this.bookShelves[2].bookCollection.push(read)
+
       this.setState({ currentlyReading, wantToRead, read })
 
       })
@@ -47,7 +48,9 @@ class BooksApp extends React.Component {
   render() {
 
     // console.log('bookCollection', this.state.bookCollection)
-    console.log('somebooks', this.bookShelves[0].bookCollection); // it shows the inside of the bookco
+    console.log('bookShelve1', this.bookShelves[0].bookCollection); // it shows the inside of the bookco
+    console.log('bookShelve2', this.bookShelves[1].bookCollection);
+    console.log('bookShelve3', this.bookShelves[2].bookCollection);
 
     return (
       <div className="app">

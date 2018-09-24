@@ -1,10 +1,28 @@
 import React, { Component } from 'react'
 import BookList from './BookList'
 
+
+
+
 class BookShelf extends Component {
+
+// this is a function and it works
+  filterBooks() {
+    let bookNum1 = "bbay"
+    let bookNum2 = "Hecato"
+    let bookNum3 = "ffjdkjfdjf"
+    let bookNum4 = this.props
+    console.log(`this is ${bookNum1} fron ${bookNum2} going to  ${bookNum4}!!!`)
+  }
+
+
+
   render() {
 
-    //console.log("bookShelProps", this.props)
+
+    this.filterBooks()
+    console.log("filterBooks", this.filterBooks)
+    console.log("bookShelProps", this.props)
     //console.log("bookshelves", this.props.bookShelves)
 
 
@@ -16,7 +34,8 @@ class BookShelf extends Component {
               <div className="bookshelf">
               <h2 className="bookshelf-title">{bookshelf.name}</h2>
               <div className="bookshelf-books">
-                <BookList books={this.props} bookshelf={bookshelf.name}/>
+                {/*<BookList books={this.props} bookshelf={bookshelf.name}/> */}
+                <p>Hello</p>
               </div>
             </div>
           </div>
