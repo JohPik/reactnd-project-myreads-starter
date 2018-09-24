@@ -1,34 +1,27 @@
 import React, { Component } from 'react'
-import Book from './Book'
+import BookList from './BookList'
 
 class BookShelf extends Component {
   render() {
+
+    console.log("bookShelProps", this.props)
+    console.log("bookshelves", this.props.bookShelves)
+
+
+
     return (
-  <div className="list-books-content">
-    <div>
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">Currently Reading</h2>
-        <div className="bookshelf-books">
-          <Book books={this.state.books}/>
-        </div>
-      </div>
-
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">Want to Read</h2>
-        <div className="bookshelf-books">
-          <Book books={this.state.books}/>
-        </div>
-      </div>
-
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">Read</h2>
-        <div className="bookshelf-books">
-          <Book books={this.state.books}/>
-        </div>
-      </div>
-
-    </div>
-  </div>
+          <div className="list-books-content">
+          {this.props.bookShelves.map( bookshelf =>
+            <div key={bookshelf.name}>
+              <div className="bookshelf">
+              <h2 className="bookshelf-title">{bookshelf.name}</h2>
+              <div className="bookshelf-books">
+                <BookList books={this.props} bookshelf={bookshelf.name}/>
+              </div>
+            </div>
+          </div>
+          )}
+          </div>
     )}
 }
 
