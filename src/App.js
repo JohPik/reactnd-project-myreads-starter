@@ -36,7 +36,6 @@ class BooksApp extends React.Component {
       let read = []
 
           books.map(book => {
-            
 
             // if (book.shelf === "currentlyReading") {
             //   currentlyReading.push(book)
