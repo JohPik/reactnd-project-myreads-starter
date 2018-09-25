@@ -18,46 +18,24 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
 
-  bookShelves = [
-    {name: "Currently Reading", id:"currentlyReading", bookCollection:[]},
-    {name: "Want To Read", id:"wantToRead", bookCollection:[]},
-    {name: "Read", id:"read", bookCollection:[]}
-  ]
-
-
-  componentDidMount() { // call for All the Books currently in the App
+  // call for All the Books currently in the App
+  componentDidMount() {
     BooksAPI.getAll().then((books) => {
-
-      /* Filter the books between bookShelves */
-      let currentlyReading = books.filter(book => book.shelf === "currentlyReading");
-      let wantToRead = books.filter(book => book.shelf === "wantToRead");
-      let read = books.filter(book => book.shelf === "read");
-
-      this.bookShelves[0].bookCollection.push(currentlyReading)
-      this.bookShelves[1].bookCollection.push(wantToRead)
-      this.bookShelves[2].bookCollection.push(read)
-
-      this.setState({ currentlyReading, wantToRead, read })
-
+      this.setState({ allBooks: books })
       })
     }
 
-
-
-
   render() {
-
     // console.log('bookCollection', this.state.bookCollection)
-    console.log('bookShelve1', this.bookShelves[0].bookCollection); // it shows the inside of the bookco
-    console.log('bookShelve2', this.bookShelves[1].bookCollection);
-    console.log('bookShelve3', this.bookShelves[2].bookCollection);
-
+    // console.log('bookShelve1', this.bookShelves[0].bookCollection)
+    // console.log('bookShelve2', this.bookShelves[1].bookCollection)
+    // console.log('bookShelve3', this.bookShelves[2].bookCollection)
     return (
       <div className="app">
         {/*  State 1  */}
         <div className="list-books">
         <Header />
-        <BookShelf bookShelves={this.bookShelves} currentlyReading={this.state.currentlyReading} wantToRead={this.state.wantToRead} read={this.state.read}/>
+        <BookShelf allBooks={this.state.allBooks} />
         </div>
       </div>
     )}

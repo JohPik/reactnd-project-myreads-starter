@@ -1,41 +1,60 @@
 import React, { Component } from 'react'
-import BookList from './BookList'
-
-
+import Book from './Book'
 
 
 class BookShelf extends Component {
 
-// this is a function and it works
+  // The Book Shelves and their Collection of Books
+  bookShelves = [
+    {name: "Currently Reading", id:"currentlyReading", bookCollection:[]},
+    {name: "Want To Read", id:"wantToRead", bookCollection:[]},
+    {name: "Read", id:"read", bookCollection:[]}
+  ]
+
+  // Filter The Books
   filterBooks() {
-    let bookNum1 = "bbay"
-    let bookNum2 = "Hecato"
-    let bookNum3 = "ffjdkjfdjf"
-    let bookNum4 = this.props
-    console.log(`this is ${bookNum1} fron ${bookNum2} going to  ${bookNum4}!!!`)
+    let currentlyReading = this.props.allBooks.filter(book => book.shelf === "currentlyReading");
+    let wantToRead = this.props.allBooks.filter(book => book.shelf === "wantToRead");
+    let read = this.props.allBooks.filter(book => book.shelf === "read");
+
+    // this.bookShelves[0].bookCollection.push(currentlyReading)
+    // this.bookShelves[1].bookCollection.push(wantToRead)
+    // this.bookShelves[2].bookCollection.push(read)
+    // this.setState({ currentlyReading, wantToRead, read })
+
+    this.bookShelves[0].bookCollection = currentlyReading
+    this.bookShelves[1].bookCollection = wantToRead
+    this.bookShelves[2].bookCollection = read
+
+    // console.log("currentlyReading", currentlyReading)
   }
+
 
 
 
   render() {
 
-
+    // Call the Filter functions
     this.filterBooks()
-    console.log("filterBooks", this.filterBooks)
-    console.log("bookShelProps", this.props)
-    //console.log("bookshelves", this.props.bookShelves)
 
-
+    // console.log("bookShelProps", this.props)
+    // console.log("bookShelProps AllBooks", this.props.allBooks)
+    // console.log("bookshelves", this.bookShelves)
+    // console.log("currentlyReading Collection", this.bookShelves[0].bookCollection);
+    // console.log("wantToRead Collection", this.bookShelves[1].bookCollection);
+    // console.log("read Collection", this.bookShelves[2].bookCollection);
 
     return (
           <div className="list-books-content">
-          {this.props.bookShelves.map( bookshelf =>
+          {this.bookShelves.map( bookshelf =>
             <div key={bookshelf.name}>
               <div className="bookshelf">
               <h2 className="bookshelf-title">{bookshelf.name}</h2>
               <div className="bookshelf-books">
-                {/*<BookList books={this.props} bookshelf={bookshelf.name}/> */}
-                <p>Hello</p>
+              {/* <BookList bookshelves={this.bookShelves}/> */}
+              <ol  className="books-grid">
+                {bookshelf.bookCollection.map(book => <Book key={book.id} book={book}/>)}
+              </ol>
               </div>
             </div>
           </div>
