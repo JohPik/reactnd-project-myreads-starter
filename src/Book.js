@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 class Book extends Component {
 
       render() {
-        console.log("Bookprops", this.props)
-        console.log("Bookprops title", this.props.book.title)
+        //console.log("Bookprops", this.props.moveBook)
+        // console.log("Bookprops title", this.props.book.title)
         // console.log("Bookprops LIST", this.props.list)
 
         return(
@@ -13,13 +13,13 @@ class Book extends Component {
                  <div className="book-top">
                    <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${this.props.book.imageLinks.smallThumbnail}")` }}></div>
                    <div className="book-shelf-changer">
-                     <select>
-                       <option value="move" disabled>Move to...</option>
+                     <select onChange={event => this.props.moveBook(this.props.book.id, event.target.value)}>
+                       <option value="none" disabled>Move to...</option>
                        <option value="currentlyReading">Currently Reading</option>
                        <option value="wantToRead">Want to Read</option>
                        <option value="read">Read</option>
                        <option value="none">None</option>
-                     </select>
+                   </select>
                    </div>
                  </div>
                  <div className="book-title">{this.props.book.title}</div>
