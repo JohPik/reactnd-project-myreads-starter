@@ -40,6 +40,9 @@ class BooksApp extends React.Component {
       BooksAPI.getAll().then((books) => {
         this.setState({ allBooks: books })
       })
+      console.log("all book Has been Called");
+      console.log("this", this)
+      console.log("this.state", this.state)
     }
 
   // Make the API has been called
