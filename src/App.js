@@ -1,8 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Header from './Header'
 import BookShelf from './BookShelf'
+import BookSearch from './BookSearch'
+
 
 class BooksApp extends React.Component {
   state = {
@@ -12,8 +16,7 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    allBooks: [],
-    showSearchPage: false
+    allBooks: []
   }
 
     // The Book Shelves and their Collection of Books
@@ -52,17 +55,35 @@ class BooksApp extends React.Component {
         BooksAPI.update(book, shelf).then(() => this.getAllBooks())
       }
 
+  searchBooks = (query) => {
+    BooksAPI.search(query).then(() => this.getAllBooks())
+  }
+
   render() {
     //Filters the book before Rendering
     this.filterBooks()
 
     return (
       <div className="app">
-        {/*  State 1  */}
-        <div className="list-books">
-          <Header />
-          <BookShelf bookShelves={this.bookShelves} moveBook={this.moveBook}/>
-        </div>
+        {/* This is my bookShelves State */}
+        <Route exact path="/" render={() => (
+          <div className="list-books">
+            <Header />
+            <BookShelf bookShelves={this.bookShelves} moveBook={this.moveBook}/>
+              <div className="open-search">
+                <Link
+                  to="/searchBooks"
+                  className="add-book">
+                  Add a book
+                </Link>
+              </div>
+          </div>
+        )}/>
+
+        {/* This is my searchBooks State */}
+        <Route path="/searchBooks" render={() => (
+            <BookSearch searchBooks={this.searchBooks}/>
+            )}/>
       </div>
     )}
 }
