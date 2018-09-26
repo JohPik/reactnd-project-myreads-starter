@@ -5,7 +5,6 @@ import Book from './Book'
 class BookShelf extends Component {
 
   render() {
-    //console.log("this Props", this.props.moveBook);
     return (
       <div className="list-books-content">
         {this.props.bookShelves.map( bookshelf =>

@@ -40,9 +40,6 @@ class BooksApp extends React.Component {
       BooksAPI.getAll().then((books) => {
         this.setState({ allBooks: books })
       })
-      console.log("all book Has been Called");
-      console.log("this", this)
-      console.log("this.state", this.state)
     }
 
   // Make the API has been called
@@ -52,21 +49,19 @@ class BooksApp extends React.Component {
 
   // Change the book from one Shelf to another
   moveBook = (book, shelf) => {
-          BooksAPI.update(book, shelf).then(() => {
-               this.getAllBooks();
-          })
-        }
-
+        BooksAPI.update(book, shelf).then(() => this.getAllBooks())
+      }
 
   render() {
     //Filters the book before Rendering
     this.filterBooks()
+
     return (
       <div className="app">
         {/*  State 1  */}
         <div className="list-books">
-        <Header />
-        <BookShelf bookShelves={this.bookShelves} moveBook={this.moveBook}/>
+          <Header />
+          <BookShelf bookShelves={this.bookShelves} moveBook={this.moveBook}/>
         </div>
       </div>
     )}
