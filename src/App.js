@@ -16,7 +16,8 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    allBooks: []
+    allBooks: [],
+    searchResult: [] // maybe issue HERE
   }
 
     // The Book Shelves and their Collection of Books
@@ -38,12 +39,12 @@ class BooksApp extends React.Component {
 
     }
 
-    // call for All the Books currently in the App
-    getAllBooks = () => {
-      BooksAPI.getAll().then((books) => {
-        this.setState({ allBooks: books })
-      })
-    }
+  // call for All the Books currently in the App
+  getAllBooks = () => {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ allBooks: books })
+    })
+  }
 
   // Make the API has been called
   componentDidMount() {
@@ -56,8 +57,11 @@ class BooksApp extends React.Component {
       }
 
   searchBooks = (query) => {
-    BooksAPI.search(query).then(() => this.getAllBooks())
+    BooksAPI.search(query).then((books) => {
+      this.setState({ searchResult: books }) // maybe issue HERE
+    })
   }
+
 
   render() {
     //Filters the book before Rendering
