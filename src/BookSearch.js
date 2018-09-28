@@ -10,7 +10,6 @@ class BookSearch extends Component {
   //Update query when input field changes
   updateQuery = (query) => {
     this.setState({query: query.trim()})
-    console.log(this.state.query)
   }
 
   //Trigers updateQuery() and searchBooks

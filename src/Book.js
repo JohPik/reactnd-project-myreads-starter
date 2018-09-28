@@ -8,13 +8,13 @@ class Book extends Component {
                  <div className="book-top">
                    <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${this.props.book.imageLinks.smallThumbnail}")` }}></div>
                    <div className="book-shelf-changer">
-                     <select value={this.props.book.shelf} onChange={event => this.props.moveBook(this.props.book, event.target.value)}>
-                       <option value="none" disabled>Move to...</option>
-                       <option defaultValue="none">None</option>
-                       <option value="currentlyReading">Currently Reading</option>
+                     <select value={this.props.book.shelf === undefined ? "none" : this.props.book.shelf } onChange={event => this.props.moveBook(this.props.book, event.target.value)}>
+                       <option value="move" disabled>Move to...</option>
+                      <option value="currentlyReading">Currently Reading</option>
                        <option  value="wantToRead" >Want to Read</option>
                        <option value="read">Read</option>
-                   </select>
+                       <option value="none">None</option>
+                     </select>
                    </div>
                  </div>
                  <div className="book-title">{this.props.book.title}</div>
