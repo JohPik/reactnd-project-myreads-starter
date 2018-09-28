@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 
 class Book extends Component {
-    none = "none"
-
       render() {
         return(
           <li key={this.props.book.id}>

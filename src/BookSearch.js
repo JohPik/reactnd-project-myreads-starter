@@ -4,18 +4,19 @@ import Book from './Book'
 
 class BookSearch extends Component {
   state = {
-    query: '',
-    searchResult: []
+    query: '' //Contains the query from input field
   }
 
-  searchManage = (query) => {
-    this.updateQuery(query)
-    this.props.searchBooks(query)
-  }
-
+  //Update query when input field changes
   updateQuery = (query) => {
     this.setState({query: query.trim()})
     console.log(this.state.query)
+  }
+
+  //Trigers updateQuery() and searchBooks
+  searchManage = (query) => {
+    this.updateQuery(query)
+    this.props.searchBooks(query)
   }
 
   render() {

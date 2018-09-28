@@ -10,14 +10,8 @@ import BookSearch from './BookSearch'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
-    allBooks: [],
-    searchResult: [] // maybe issue HERE
+    allBooks: [], //Contains all the Books currently in Shelves
+    searchResult: [] //Contains all the Books in Search Results
   }
 
     // The Book Shelves and their Collection of Books
@@ -27,7 +21,7 @@ class BooksApp extends React.Component {
       {name: "Read", id:"read", bookCollection:[]}
     ]
 
-    // Filter The Books
+    // Filter The Books from allBooks to the bookCollections of BookShelves
     filterBooks() {
       let currentlyReading = this.state.allBooks.filter(book => book.shelf === "currentlyReading");
       let wantToRead = this.state.allBooks.filter(book => book.shelf === "wantToRead");
@@ -56,6 +50,7 @@ class BooksApp extends React.Component {
         BooksAPI.update(book, shelf).then(() => this.getAllBooks())
       }
 
+  // Search for new books
   searchBooks = (query) => {
     BooksAPI.search(query).then((books) => {
       this.setState({ searchResult: books })
@@ -71,22 +66,18 @@ class BooksApp extends React.Component {
 
     return (
       <div className="app">
-        {/* This is my bookShelves State */}
+        {/*  The Book Shelves  */}
         <Route exact path="/" render={() => (
           <div className="list-books">
             <Header />
             <BookShelf bookShelves={this.bookShelves} moveBook={this.moveBook}/>
               <div className="open-search">
-                <Link
-                  to="/searchBooks"
-                  className="add-book">
-                  Add a book
-                </Link>
+                <Link to="/searchBooks" className="add-book">Add a book</Link>
               </div>
           </div>
         )}/>
 
-        {/* This is my searchBooks State */}
+      {/* The Search */}
         <Route path="/searchBooks" render={() => (
             <BookSearch searchBooks={this.searchBooks} searchResult={this.state.searchResult} moveBook={this.moveBook}/>
             )}/>
