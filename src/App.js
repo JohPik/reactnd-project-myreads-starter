@@ -58,7 +58,9 @@ class BooksApp extends React.Component {
 
   searchBooks = (query) => {
     BooksAPI.search(query).then((books) => {
-      this.setState({ searchResult: books }) // maybe issue HERE
+      this.setState({ searchResult: books })
+      // console.log("books", books)
+      console.log("searchResult", this.state.searchResult)
     })
   }
 
@@ -86,7 +88,7 @@ class BooksApp extends React.Component {
 
         {/* This is my searchBooks State */}
         <Route path="/searchBooks" render={() => (
-            <BookSearch searchBooks={this.searchBooks}/>
+            <BookSearch searchBooks={this.searchBooks} searchResult={this.state.searchResult} moveBook={this.moveBook}/>
             )}/>
       </div>
     )}

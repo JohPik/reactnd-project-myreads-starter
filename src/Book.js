@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 class Book extends Component {
+    none = "none"
 
       render() {
         return(
@@ -11,10 +12,10 @@ class Book extends Component {
                    <div className="book-shelf-changer">
                      <select value={this.props.book.shelf} onChange={event => this.props.moveBook(this.props.book, event.target.value)}>
                        <option value="none" disabled>Move to...</option>
+                       <option defaultValue="none">None</option>
                        <option value="currentlyReading">Currently Reading</option>
                        <option  value="wantToRead" >Want to Read</option>
                        <option value="read">Read</option>
-                       <option value="none">None</option>
                    </select>
                    </div>
                  </div>
