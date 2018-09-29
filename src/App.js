@@ -50,15 +50,16 @@ class BooksApp extends React.Component {
         BooksAPI.update(book, shelf).then(() => this.getAllBooks())
       }
 
+
   // Search for new books
   searchBooks = (query) => {
-    BooksAPI.search(query).then((books) => {
-      this.setState({ searchResult: books })
-      // console.log("books", books)
-      //console.log("searchResult", this.state.searchResult)
-    })
+    query.length < 1 ?
+      this.setState({ searchResult: '' })
+      :
+      BooksAPI.search(query).then((books) => {this.setState({ searchResult: books })
+        //books.length > 0 ? this.setState({ searchResult: books }) : this.setState({ searchResult: '' })
+      })
   }
-
 
   render() {
     //Filters the book before Rendering

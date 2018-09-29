@@ -34,7 +34,9 @@ class BookSearch extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {this.props.searchResult.map(book => <Book key={book.id} book={book} moveBook={this.props.moveBook}/>)}
+            {this.props.searchResult.length > 0 && (
+                this.props.searchResult.map(book => <Book key={book.id} book={book} moveBook={this.props.moveBook}/>)
+            )}
           </ol>
         </div>
       </div>
