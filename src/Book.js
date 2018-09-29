@@ -6,7 +6,10 @@ class Book extends Component {
           <li key={this.props.book.id}>
                <div className="book">
                  <div className="book-top">
-                   <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${this.props.book.imageLinks.smallThumbnail}")` }}></div>
+                   <div className="book-cover"
+                        style={{ width: 128, height: 188,
+                                 backgroundImage: `url("${this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : null}")`
+                               }}></div>
                    <div className="book-shelf-changer">
                      <select value={this.props.book.shelf === undefined ? "none" : this.props.book.shelf } onChange={event => this.props.moveBook(this.props.book, event.target.value)}>
                        <option value="move" disabled>Move to...</option>
