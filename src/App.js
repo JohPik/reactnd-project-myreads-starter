@@ -57,8 +57,12 @@ class BooksApp extends React.Component {
       this.setState({ searchResult: '' })
       :
       BooksAPI.search(query).then((books) => {this.setState({ searchResult: books })
-        //books.length > 0 ? this.setState({ searchResult: books }) : this.setState({ searchResult: '' })
       })
+  }
+
+  // reset SearchResult when search is closed
+  resetSearch = () => {
+    this.setState({ searchResult: '' })
   }
 
   render() {
@@ -80,7 +84,11 @@ class BooksApp extends React.Component {
 
       {/* The Search */}
         <Route path="/searchBooks" render={() => (
-            <BookSearch searchBooks={this.searchBooks} searchResult={this.state.searchResult} moveBook={this.moveBook}/>
+            <BookSearch
+              searchBooks={this.searchBooks}
+              resetSearch={this.resetSearch}
+              searchResult={this.state.searchResult}
+              moveBook={this.moveBook}/>
             )}/>
       </div>
     )}
