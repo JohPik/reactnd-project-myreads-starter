@@ -7,15 +7,15 @@ class BookSearch extends Component {
     query: '' //Contains the query from input field
   }
 
-  //Update query when input field changes
+  //Update query when input field changes and
   updateQuery = (query) => {
-    this.setState({query: query.trim()})
-  }
+    this.setState({query})
+    }
 
   //Trigers updateQuery() and searchBooks
   searchManage = (query) => {
     this.updateQuery(query)
-    this.props.searchBooks(query)
+    this.props.searchBooks(query.trim())
   }
 
   render() {

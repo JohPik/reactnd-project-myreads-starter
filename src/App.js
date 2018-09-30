@@ -21,6 +21,7 @@ class BooksApp extends React.Component {
       {name: "Read", id:"read", bookCollection:[]}
     ]
 
+
     // Filter The Books from allBooks to the bookCollections of BookShelves
     filterBooks() {
       let currentlyReading = this.state.allBooks.filter(book => book.shelf === "currentlyReading");
@@ -53,16 +54,17 @@ class BooksApp extends React.Component {
 
   // Search for new books
   searchBooks = (query) => {
-    query.length < 1 ?
-      this.setState({ searchResult: '' })
+        query.length < 1 ?
+        this.setState({ searchResult: [] })
       :
-      BooksAPI.search(query).then((books) => {this.setState({ searchResult: books })
+      BooksAPI.search(query).then((books) => {
+        this.setState({ searchResult: books })
       })
   }
 
   // reset SearchResult when search is closed
   resetSearch = () => {
-    this.setState({ searchResult: '' })
+    this.setState({ searchResult: [] })
   }
 
   render() {
