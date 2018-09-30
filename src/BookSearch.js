@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import debounce from 'lodash.debounce'
 import Book from './Book'
 
 class BookSearch extends Component {
@@ -9,13 +10,15 @@ class BookSearch extends Component {
 
   //Update query when input field changes and
   updateQuery = (query) => {
-    this.setState({query})
-    }
+    this.setState({ query })
+  }
+
+  searchManageDebounced = debounce(this.props.searchBooks, 300)
 
   //Trigers updateQuery() and searchBooks
   searchManage = (query) => {
     this.updateQuery(query)
-    this.props.searchBooks(query.trim())
+    this.searchManageDebounced(query.trim())
   }
 
   render() {
@@ -29,19 +32,20 @@ class BookSearch extends Component {
               placeholder="Search by title or author"
               value={this.state.query}
               onChange={(event) => this.searchManage(event.target.value)}
-              />
+            />
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
             {this.props.searchResult.length > 0 && (
-                this.props.searchResult.map(book => <Book key={book.id} book={book} moveBook={this.props.moveBook}/>)
+              this.props.searchResult.map(book => <Book key={book.id} book={book} moveBook={this.props.moveBook} />)
             )}
           </ol>
         </div>
       </div>
 
-    )}
+    )
   }
+}
 
 export default BookSearch
