@@ -51,16 +51,29 @@ class BooksApp extends React.Component {
         BooksAPI.update(book, shelf).then(() => this.getAllBooks())
       }
 
-
   // Search for new books
   searchBooks = (query) => {
         query.length < 1 ?
         this.setState({ searchResult: [] })
       :
       BooksAPI.search(query).then((books) => {
-        this.setState({ searchResult: books })
+
+        // Compare the Books resulting from the search to the Books currently in the shelves
+        if (books.length > 1) {
+          books.forEach(book => book.shelf="none") //add a Shelf property to none to every book in the Search Results
+
+          let allBooks = this.state.allBooks
+          books.forEach((bookFromSearch) => allBooks.forEach((bookFromShelves) =>
+            { if (bookFromSearch.id === bookFromShelves.id ) {
+              bookFromSearch.shelf = bookFromShelves.shelf
+            }}
+          ))
+          this.setState({ searchResult: books})
+        } else {
+          this.setState({ searchResult: [] })
+        }
       })
-  }
+    }
 
   // reset SearchResult when search is closed
   resetSearch = () => {
