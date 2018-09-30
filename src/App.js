@@ -60,7 +60,11 @@ class BooksApp extends React.Component {
 
         // Compare the Books resulting from the search to the Books currently in the shelves
         if (books.length > 1) {
-          books.forEach(book => book.shelf="none") //add a Shelf property to none to every book in the Search Results
+
+          books.forEach(book => {
+            book.shelf="none" //add a Shelf property to none to every book in the Search Results
+            book.fromSearch=true
+          })
 
           let allBooks = this.state.allBooks
           books.forEach((bookFromSearch) => allBooks.forEach((bookFromShelves) =>
@@ -69,6 +73,8 @@ class BooksApp extends React.Component {
             }}
           ))
           this.setState({ searchResult: books})
+          console.log("search", this.state.searchResult)
+          console.log("All", this.state.allBooks)
         } else {
           this.setState({ searchResult: [] })
         }

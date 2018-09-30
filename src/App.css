@@ -172,3 +172,20 @@ body, .app {
   text-align: center;
   font-size: 0.8em;
 }
+
+.current-shelf {
+  font-size: 0.8em;
+  position: absolute;
+  top: 86%;
+  left: 47%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background: rgb(96, 172, 93);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.current-shelf span{
+  color: yellow;
+}
